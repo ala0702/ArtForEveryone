@@ -20,12 +20,12 @@ namespace ArtForEveryone
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindowViewModel ViewModel { get; set; }
 
-        public Color mainColor { get; set; } = Colors.Red;
-        public SolidColorBrush MainBrush => new SolidColorBrush(mainColor);
+        
 
 
-        //Color mainColor = Colors.Red;
+        //Color ViewModel.MainColor = Colors.Red;
 
         int drawStyle = 0;
 
@@ -46,7 +46,9 @@ namespace ArtForEveryone
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = this;
+            ViewModel = new MainWindowViewModel();
+            this.DataContext = ViewModel;
+            
         }
 
 
@@ -59,7 +61,7 @@ namespace ArtForEveryone
 
                 if (drawStyle == 2)
                 {
-                    drawingHelper.DrawPoint(6, currentPoint.X, currentPoint.Y,mainColor, WorkingSpace);
+                    drawingHelper.DrawPoint(6, currentPoint.X, currentPoint.Y,ViewModel.MainColor, WorkingSpace);
                 }
                 else if (drawStyle == 3)
                 {
@@ -71,7 +73,7 @@ namespace ArtForEveryone
                     }
                     else
                     {
-                        LineSegment newLine = new LineSegment(startPoint, e.GetPosition(this), WorkingSpace, mainColor);
+                        LineSegment newLine = new LineSegment(startPoint, e.GetPosition(this), WorkingSpace, ViewModel.MainColor);
                         lineSegments.Add(newLine);
 
                         isStartPoint = false;
@@ -119,55 +121,55 @@ namespace ArtForEveryone
                     else
                     {
                         isEditingSegment = false;
-                        Brush brushColor = new SolidColorBrush(mainColor);
+                        Brush brushColor = new SolidColorBrush(ViewModel.MainColor);
                         clickedLineSegment.Line.Stroke = brushColor;
                         clickedLineSegment.DrawPoints();
                     }
                 }
                 else if(drawStyle == 5)
                 {
-                    drawingHelper.DrawCircle(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawCircle(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 6)
                 {
-                    drawingHelper.DrawTriangle(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawTriangle(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 7)
                 {
-                    drawingHelper.DrawSquare(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawSquare(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 8)
                 {
                     //prostokat
-                    drawingHelper.DrawRectangle(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawRectangle(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 9)
                 {
 
-                    drawingHelper.DrawPentagon(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawPentagon(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 10)
                 {
-                    drawingHelper.DrawHexagon(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawHexagon(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 11)
                 {
-                    drawingHelper.DrawDecagon(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawDecagon(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 12)
                 {
                     //eownoleglobok
-                    drawingHelper.DrawParallelogram(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawParallelogram(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 13)
                 {
                     //eownoleglobok
-                    drawingHelper.DrawStar(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawStar(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 14)
                 {
                     //eownoleglobok
-                    drawingHelper.DrawVerticalArrow(currentPoint, WorkingSpace, mainColor);
+                    drawingHelper.DrawVerticalArrow(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
             }
         }
@@ -179,8 +181,8 @@ namespace ArtForEveryone
                 if (drawStyle == 1)
                 {
                     // Use the returned line from DrawCustomLine and add it to the canvas
-                    drawingHelper.DrawCustomLine(ref currentPoint, e, WorkingSpace, mainColor);
-                    drawingHelper.DrawPoint(1.0, currentPoint.X, currentPoint.Y, mainColor, WorkingSpace);
+                    drawingHelper.DrawCustomLine(ref currentPoint, e, WorkingSpace, ViewModel.MainColor);
+                    drawingHelper.DrawPoint(1.0, currentPoint.X, currentPoint.Y, ViewModel.MainColor, WorkingSpace);
                     // Narysuj nową tymczasową linię
 
 
@@ -199,7 +201,7 @@ namespace ArtForEveryone
                     }
 
                     // Narysuj nową tymczasową linię
-                    previewLine = drawingHelper.DrawStreightLine(startPoint, e.GetPosition(this), WorkingSpace, mainColor);
+                    previewLine = drawingHelper.DrawStreightLine(startPoint, e.GetPosition(this), WorkingSpace, ViewModel.MainColor);
 
                 }
                 else if (drawStyle == 4 && isEditingSegment)
@@ -321,7 +323,7 @@ namespace ArtForEveryone
 
         private void ColorPicker_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ColorPickerWindow colorPickerWindow = new ColorPickerWindow();
+            ColorPickerWindow colorPickerWindow = new ColorPickerWindow(ViewModel);
             colorPickerWindow.Show();
         }
     }

@@ -19,9 +19,49 @@ namespace ArtForEveryone
     /// </summary>
     public partial class ColorPickerWindow : Window
     {
-        public ColorPickerWindow()
+        private readonly MainWindowViewModel _mainWindowViewModel;
+        public ColorPickerWindow(MainWindowViewModel mainWindowViewModel)
         {
             InitializeComponent();
+            _mainWindowViewModel = mainWindowViewModel;
+            this.DataContext = _mainWindowViewModel;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                byte red = Convert.ToByte(txtRed.Text);
+                byte green = Convert.ToByte(txtGreen.Text);
+                byte blue = Convert.ToByte(txtBlue.Text);
+
+                if (IsValidColorValue(red) && IsValidColorValue(green) && IsValidColorValue(blue))
+                { 
+                    _mainWindowViewModel.Red = red;
+                    _mainWindowViewModel.Green = green;
+                    _mainWindowViewModel.Blue = blue;
+                }
+                else
+                {
+                    // Komunikat o błędzie - wartości kolorów poza zakresem
+                    MessageBox.Show("Wartości kolorów muszą być w zakresie od 0 do 255.");
+                }
+            }
+            catch (FormatException)
+            {
+                // Komunikat o błędzie - nieprawidłowy format liczby
+                MessageBox.Show("Wprowadzono nieprawidłowy format liczby.");
+            }
+            catch (OverflowException)
+            {
+                // Komunikat o błędzie - przekroczenie zakresu liczby
+                MessageBox.Show("Przekroczono zakres liczby.");
+            }
+        }
+
+        private bool IsValidColorValue(byte value)
+        {
+            return value >= 0 && value <= 255;
         }
     }
 }
