@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArtForEveryone"
         mc:Ignorable="d"
-        Title="ArtForEveryone" Height="450" Width="800">
+        Title="ArtForEveryone" Height="450" Width="800" ResizeMode="NoResize">
  
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="WorkingSpace" MouseLeftButtonDown="WorkingSpace_MouseLeftButtonDown" MouseMove="WorkingSpace_MouseMove"
+        <Canvas x:Name="WorkingSpace" Height="450" Width="800" MouseLeftButtonDown="WorkingSpace_MouseLeftButtonDown" MouseMove="WorkingSpace_MouseMove"
                 >
             <Canvas.Background>
                 <SolidColorBrush Color="White" Opacity="0"/>
@@ -21,6 +21,11 @@
 
         <ToolBarPanel Margin="0,1,0,0">
             <ToolBar VerticalAlignment="Top">
+                <Menu >
+                    <MenuItem Header="Plik" >
+                        <MenuItem x:Name="SaveAs" Header="Zapisz jako" Click="SaveAs_Click"/>
+                    </MenuItem>
+                </Menu>
                 <Button x:Name="Przycisk" Content="O aplikacji" Click="Przycisk_Click"/>
                 <Button x:Name="DrawBtn" Content="Rysuj dowolnie" Click="DrawBtn_Click"/>
                 <Button x:Name="DrawPoints" Content="Rysuj punkty" Click="DrawPoints_Click"/>
@@ -46,6 +51,19 @@
                         
                     </MenuItem>
                 </Menu>
+                <Button Content="Wczytaj Obrazek" Click="LoadImage_Click" />
+                <Button x:Name="btnErase" Content="Gumka" Click="btnErase_Click" />
+                <Menu>
+                    <MenuItem Header="Edycja Obrazu">
+                        <!-- Przesunięcie -->
+                        <!-- Filtr -->
+                        <MenuItem Header="Filtr">
+                            <MenuItem Header="Filtrowanie obrazu maską" Click="MenuItem_Click" />
+                            <MenuItem Header="Filtr 2" />
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+
                 <Rectangle x:Name="ColorPicker" Width="16" Height="16" Margin="5"  Fill="{Binding MainBrush}" MouseLeftButtonDown="ColorPicker_MouseLeftButtonDown"></Rectangle>
             </ToolBar>
         </ToolBarPanel>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -321,10 +323,127 @@ namespace ArtForEveryone
             drawStyle = 14;
         }
 
+        // chosing color picker
         private void ColorPicker_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorPickerWindow colorPickerWindow = new ColorPickerWindow(ViewModel);
             colorPickerWindow.Show();
+        }
+
+        // save file button
+        private void SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Image File (*.png)|*.png|Image FIle (*.jpg)|*.jpg";
+            saveFileDialog.FilterIndex = 1;
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                Uri newFileUri = new Uri(saveFileDialog.FileName);
+                SaveImageAsPng(newFileUri, WorkingSpace);
+            }
+
+        }
+
+        private void SaveImageAsPng(Uri newFileUri, Canvas canvas)
+        {
+            if(newFileUri == null)
+            {
+                return;
+            }
+            Transform transform = canvas.LayoutTransform;
+            canvas.LayoutTransform = null;
+            Size size = new Size(canvas.Width, canvas.Height);
+            canvas.Measure(size);
+            canvas.Arrange(new Rect(size));
+
+            RenderTargetBitmap renderBitmap = new RenderTargetBitmap(
+                (int)size.Width,
+                (int)size.Height,
+                96d,
+                96d,
+                PixelFormats.Pbgra32);
+            renderBitmap.Render(canvas);
+            using (FileStream outStream = new FileStream(newFileUri.LocalPath, FileMode.Create))
+            {
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+                encoder.Save(outStream);
+            }
+            canvas.LayoutTransform = transform;
+        }
+
+
+        // loading image into canvas
+        private void LoadImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.png;*.jpg)|*.png;*.jpg|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string imagePath = openFileDialog.FileName;
+
+                // Pytanie o wymiary
+                AskForDimensions(out double width, out double height);
+                AskForCoordinates(out double x, out double y);
+
+                // Tworzy obiekt CustomImage i dodaje go do Canvas
+                CustomImage customImage = new CustomImage(imagePath, x, y, width, height);
+                customImage.AddToCanvas(WorkingSpace);
+            }
+        }
+        private void AskForCoordinates(out double x, out double y)
+        {
+            InputDialog xDialog = new InputDialog("Podaj współrzędną x:");
+            if (xDialog.ShowDialog() == true)
+            {
+                double.TryParse(xDialog.Result, out x);
+                y = x;
+
+                InputDialog yDialog = new InputDialog("Podaj współrzędną y:");
+                if (yDialog.ShowDialog() == true)
+                {
+                    double.TryParse(yDialog.Result, out y);
+                }
+            }
+            else
+            {
+                x = 0;
+                y = 0;
+            }
+
+        }
+        private void AskForDimensions(out double width, out double height)
+        {
+            InputDialog widthDialog = new InputDialog("Podaj szerokość obrazu:");
+            if (widthDialog.ShowDialog() == true)
+            {
+                double.TryParse(widthDialog.Result, out width);
+                height = width;
+
+                InputDialog heightDialog = new InputDialog("Podaj wysokość obrazu:");
+                if (heightDialog.ShowDialog() == true)
+                {
+                    double.TryParse(heightDialog.Result, out height);
+                }
+            }
+            else
+            {
+                height = 0;
+                width = 0; 
+            }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ImageFilteringMaskWindow imageFIlteringMaskWindow = new ImageFilteringMaskWindow();
+            imageFIlteringMaskWindow.Show();
+
+        }
+
+        private void btnErase_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
     

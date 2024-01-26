@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\App.xaml
-21612532434
+42040483517
 
-11-1149228632
+15-901800387
 13-1310406943
-ColorPickerWindow.xaml;MainWindow.xaml;
+ColorPickerWindow.xaml;ImageFilteringMaskWindow.xaml;InputDialog.xaml;MainWindow.xaml;
 
-False
+True
 

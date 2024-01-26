@@ -16,3 +16,7 @@ D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\obj\Debug\A
 D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\obj\Debug\ArtForEveryone.pdb
 D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\obj\Debug\ColorPickerWindow.g.cs
 D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\obj\Debug\ColorPickerWindow.baml
+D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\obj\Debug\InputDialog.g.cs
+D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\obj\Debug\InputDialog.baml
+D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\obj\Debug\ImageFilteringMaskWindow.g.cs
+D:\moje_projekty\C# WPF\ArtForEveryone\ArtForEveryone\ArtForEveryone\obj\Debug\ImageFilteringMaskWindow.baml
