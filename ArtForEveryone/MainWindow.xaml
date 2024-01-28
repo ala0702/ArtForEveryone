@@ -59,7 +59,7 @@
                         <!-- Filtr -->
                         <MenuItem Header="Filtr">
                             <MenuItem Header="Filtrowanie obrazu maską" Click="MenuItem_Click" />
-                            <MenuItem Header="Filtr 2" />
+                            <MenuItem x:Name="btnSelectFiltr" Header="Sobel" Click="btnSelectFiltr_Click" />
                         </MenuItem>
                     </MenuItem>
                 </Menu>

@@ -36,6 +36,10 @@ namespace ArtForEveryone
 
         private List<LineSegment> lineSegments = new List<LineSegment>();
 
+        //customline
+        Point startCustomPoint = new Point();
+
+        //odcinki
         Point startPoint = new Point();
         bool isStartPoint = false;
         Line previewLine = null;
@@ -52,9 +56,7 @@ namespace ArtForEveryone
             this.DataContext = ViewModel;
             
         }
-
-
-       
+   
         private void WorkingSpace_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ButtonState == MouseButtonState.Pressed)
@@ -173,6 +175,18 @@ namespace ArtForEveryone
                     //eownoleglobok
                     drawingHelper.DrawVerticalArrow(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
+                else if(drawStyle == 15)
+                {
+                    var clickedElement = e.Source as FrameworkElement;
+
+                    if(clickedElement != null)
+                    {
+                        if(WorkingSpace.Children.Contains(clickedElement))
+                        {
+                            WorkingSpace.Children.Remove(clickedElement);
+                        }
+                    }
+                }
             }
         }
         private void WorkingSpace_MouseMove(object sender, MouseEventArgs e)
@@ -183,16 +197,49 @@ namespace ArtForEveryone
                 if (drawStyle == 1)
                 {
                     // Use the returned line from DrawCustomLine and add it to the canvas
-                    drawingHelper.DrawCustomLine(ref currentPoint, e, WorkingSpace, ViewModel.MainColor);
-                    drawingHelper.DrawPoint(1.0, currentPoint.X, currentPoint.Y, ViewModel.MainColor, WorkingSpace);
-                    // Narysuj nową tymczasową linię
+                    //drawingHelper.DrawCustomLine(ref currentPoint, e, WorkingSpace, ViewModel.MainColor);
 
+                    if (startCustomPoint == default(Point))
+                    {
+                        startCustomPoint = currentPoint; // Zainicjowanie punktu początkowego, jeśli nie został jeszcze ustawiony
+                    }
+                    currentPoint = e.GetPosition(WorkingSpace);
 
+                    Line line = new Line();
+                    Brush brushColor = new SolidColorBrush(ViewModel.MainColor);
+                    line.Stroke = brushColor;
+                    line.StrokeThickness = 2; // Grubość linii
+                    line.X1 = startCustomPoint.X;
+                    line.Y1 = startCustomPoint.Y;
+                    line.X2 = currentPoint.X;
+                    line.Y2 = currentPoint.Y;
 
+                    WorkingSpace.Children.Add(line);
+
+                    // Aktualizacja punktu początkowego na bieżącą pozycję myszy
+                    startCustomPoint = currentPoint;
+
+                }
+                if (drawStyle == 15)
+                {
+                    var clickedElement = e.Source as FrameworkElement;
+
+                    if (clickedElement != null)
+                    {
+                        if (WorkingSpace.Children.Contains(clickedElement))
+                        {
+                            WorkingSpace.Children.Remove(clickedElement);
+                        }
+                    }
                 }
             }
             else if (e.LeftButton == MouseButtonState.Released)
             {
+                if(drawStyle == 1)
+                {
+                    // resetowanie punkt  gdy puścimy lewy przycisk myszy
+                    startCustomPoint = default(Point);
+                }
                 if (drawStyle == 3 && isStartPoint)
                 {
                     // jeśli masz już utworzoną tymczasową linię, usuń ją przed narysowaniem nowej
@@ -202,7 +249,7 @@ namespace ArtForEveryone
                         previewLine = null;
                     }
 
-                    // Narysuj nową tymczasową linię
+                    // narysuj nową tymczasową linię
                     previewLine = drawingHelper.DrawStreightLine(startPoint, e.GetPosition(this), WorkingSpace, ViewModel.MainColor);
 
                 }
@@ -443,7 +490,15 @@ namespace ArtForEveryone
 
         private void btnErase_Click(object sender, RoutedEventArgs e)
         {
+            drawStyle = 15;
+        }
 
+    
+
+        private void btnSelectFiltr_Click(object sender, RoutedEventArgs e)
+        {
+            ImageProcessingWindow imageProcessingWindow = new ImageProcessingWindow();
+            imageProcessingWindow.Show();
         }
     }
     

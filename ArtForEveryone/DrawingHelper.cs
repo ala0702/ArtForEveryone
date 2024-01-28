@@ -40,7 +40,7 @@ namespace ArtForEveryone
             Line line = new Line();
             Brush brushColor = new SolidColorBrush(color);
             line.Stroke = brushColor;
-            line.StrokeThickness = 2; // Set the desired thickness for the line
+            line.StrokeThickness = 2; 
 
          
             line.X1 = currentPoint.X;
