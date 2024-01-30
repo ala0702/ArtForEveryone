@@ -30,41 +30,30 @@ namespace ArtForEveryone
         {
             try
             {
-                // Tworzy obiekt Image
                 Image image = new Image();
 
-                // Ustawia źródło obrazka
                 BitmapImage bitmap = new BitmapImage(new Uri(ImagePath));
                 image.Source = bitmap;
 
-                // Ustawia wymiary obrazka
                 image.Width = Width;
                 image.Height = Height;
 
-                // Przykładowe ustawienia renderowania
+
                 image.HorizontalAlignment = HorizontalAlignment.Left;
                 image.VerticalAlignment = VerticalAlignment.Top;
 
 
-                // Ustawia pozycję obrazka na Canvas
                 Canvas.SetLeft(image, CoordinateX);
                 Canvas.SetTop(image, CoordinateY);
 
-                // Dodaje obrazek do Canvas
                 canvas.Children.Add(image);
             }
             catch (Exception ex)
             {
-                // Obsługa błędów ładowania obrazka
                 Console.WriteLine($"Błąd wczytywania obrazka: {ex.Message}");
             }
         }
 
-        public void Resize(double newWidth, double newHeight)
-        {
-            Width = newWidth;
-            Height = newHeight;
-        }
 
 
     }

@@ -38,7 +38,7 @@ namespace ArtForEveryone
                 CvInvoke.CvtColor(originalImage, sobelImage, ColorConversion.Bgr2Gray);
                 CvInvoke.Sobel(originalImage, sobelImage, DepthType.Cv8U, 1, 1,21);
 
-                // Wyświetlenie obrazu i jego przetworzonej wersji
+                
                 image.Source = new BitmapImage(new Uri(openDialog.FileName));
                
 

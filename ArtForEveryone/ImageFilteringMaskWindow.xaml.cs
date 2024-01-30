@@ -80,6 +80,8 @@ namespace ArtForEveryone
 
                 CvInvoke.Filter2D(originalMat, resultMat, kernel, new System.Drawing.Point(-1, -1));
 
+
+
                 // Convert the resulting Mat object to an Image<Bgr, byte> object
                 Image<Bgr, byte> resultImage = resultMat.ToImage<Bgr, Byte>();
 

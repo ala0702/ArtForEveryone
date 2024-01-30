@@ -22,12 +22,15 @@ namespace ArtForEveryone
         public Line Line { get; set; }
         public RoutedEventHandler MoveMenuItem_Click { get; private set; }
 
+        public Color myColor { get; set; }
+
         public LineSegment(Point startPoint, Point endPoint, Canvas canvas, Color color)
         {
             StartPoint = startPoint;
             EndPoint = endPoint;
             InitializeLine(canvas, color);
             DrawPoints();
+            myColor = color;
         }
 
         private void InitializeLine(Canvas canvas, Color color)
@@ -43,13 +46,15 @@ namespace ArtForEveryone
                 StrokeThickness = 1.5
             };
             canvas.Children.Add(Line);
+            DrawPoints();
         }
 
         public void DrawPoints()
         {
             //  funkcja z DrawingHelper do rysowania punktów 
-            Ellipse startDot = DrawPoint(5.0, StartPoint.X, StartPoint.Y, Colors.Pink, (Canvas)Line.Parent);
-            Ellipse endDot = DrawPoint(5.0, EndPoint.X, EndPoint.Y, Colors.Pink, (Canvas)Line.Parent);
+
+            Ellipse startDot = DrawPoint(5.0, StartPoint.X, StartPoint.Y, Colors.AliceBlue, (Canvas)Line.Parent);
+            Ellipse endDot = DrawPoint(5.0, EndPoint.X, EndPoint.Y, Colors.AliceBlue, (Canvas)Line.Parent);
         }
 
         public void MoveSelectedPoint(ref Point currentPoint, Canvas canvas)
@@ -67,19 +72,14 @@ namespace ArtForEveryone
                 draggingPoint = EndPoint;
             }
 
-                // Przesuń odcinek do nowych pozycji punktów
+            // Przesuń odcinek do nowych pozycji punktów
             Line.X1 = StartPoint.X;
             Line.Y1 = StartPoint.Y;
             Line.X2 = EndPoint.X;
             Line.Y2 = EndPoint.Y;
             //DrawPoints();
 
-
-
-
-            // Usuń dotychczasową linię
-            //this.Line = null;
-            //InitializeLine(canvas);
+            
         }
 
 
@@ -109,7 +109,7 @@ namespace ArtForEveryone
             // zmiana wybranego punktu
             
 
-            DrawPoint(8.0, point.X, point.Y, Colors.Blue, (Canvas)Line.Parent);
+            //DrawPoint(8.0, point.X, point.Y, Colors.Blue, (Canvas)Line.Parent);
         }
 
  
@@ -121,24 +121,21 @@ namespace ArtForEveryone
         public Rect GetBounds()
         {
             // TODO !!!!!!!!!!!!!!
-            // Zakładam, że GetBounds to metoda zwracająca prostokąt obejmujący odcinek
-            //return new Rect(StartPoint, EndPoint);
-
+           
             double halfStrokeThickness = Line.StrokeThickness / 2.0;
-            // Wyznacz kierunek odcinka
+
             Vector direction = new Vector(EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
             direction.Normalize();
 
-            // Wektor prostopadły do odcinka
+   
             Vector perpendicular = new Vector(-direction.Y, direction.X);
 
-            // Przesunięcie o połowę grubości linii w obie strony prostopadle do odcinka
+    
             Vector offset = halfStrokeThickness * perpendicular;
 
             Point topLeft = new Point(Math.Min(StartPoint.X, EndPoint.X), Math.Min(StartPoint.Y, EndPoint.Y));
             Point bottomRight = new Point(Math.Max(StartPoint.X, EndPoint.X), Math.Max(StartPoint.Y, EndPoint.Y));
 
-            // Dodaj przesunięcie
             topLeft += offset;
             bottomRight += offset;
 

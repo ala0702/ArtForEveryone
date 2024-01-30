@@ -47,8 +47,6 @@ namespace ArtForEveryone
             line.Y1 = currentPoint.Y;
             line.X2 = e.GetPosition(canvas).X;
             line.Y2 = e.GetPosition(canvas).Y;
-        
-            //line.IsHitTestVisible = true;
 
             currentPoint = e.GetPosition(canvas);
 
@@ -79,25 +77,22 @@ namespace ArtForEveryone
             double mouseY = currentPoint.Y;
             double polySize = 40;
            
-            // Create a polygon to represent a circle
+            //  polygon to represent a circle
             Polygon poly = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            poly.Stroke =brushColor; // Set the border color
-            poly.StrokeThickness = 2;    // Set the border thickness
+            poly.Stroke =brushColor; 
+            poly.StrokeThickness = 2;   
 
-            // Calculate the points for the polygon to approximate a circle
-            int sides = 6; // Adjust the number of sides for a smoother or more polygonal circle
+            int sides = 6; 
             double angleIncrement = 360.0 / sides;
 
             for (int i = 0; i < sides; i++)
             {
                 double angle = i * angleIncrement;
-                double x = mouseX + polySize * Math.Cos(Math.PI * angle / 180.0);
+                double x = mouseX + polySize * Math.Cos(Math.PI * angle / 180.0); //punkty na kole
                 double y = mouseY + polySize * Math.Sin(Math.PI * angle / 180.0);
                 poly.Points.Add(new Point(x, y));
             }
-
-            // Add the polygon to the canvas (assuming you have a canvas named WorkingSpace)
             canvas.Children.Add(poly);
         }
 
@@ -107,14 +102,13 @@ namespace ArtForEveryone
             double mouseY = currentPoint.Y;
             double polySize = 40;
 
-            // Create a polygon to represent a circle
+
             Polygon poly = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            poly.Stroke = brushColor; // Set the border color
-            poly.StrokeThickness = 2;    // Set the border thickness
+            poly.Stroke = brushColor; 
+            poly.StrokeThickness = 2;    
 
-            // Calculate the points for the polygon to approximate a circle
-            int sides = 5; // Adjust the number of sides for a smoother or more polygonal circle
+            int sides = 5; 
             double angleIncrement = 360.0 / sides;
 
             for (int i = 0; i < sides; i++)
@@ -125,7 +119,7 @@ namespace ArtForEveryone
                 poly.Points.Add(new Point(x, y));
             }
 
-            // Add the polygon to the canvas (assuming you have a canvas named WorkingSpace)
+            
             canvas.Children.Add(poly);
         }
 
@@ -135,14 +129,13 @@ namespace ArtForEveryone
             double mouseY = currentPoint.Y;
             double polySize = 40;
 
-            // Create a polygon to represent a circle
             Polygon poly = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            poly.Stroke = brushColor; // Set the border color
-            poly.StrokeThickness = 2;    // Set the border thickness
+            poly.Stroke = brushColor; 
+            poly.StrokeThickness = 2;  
 
-            // Calculate the points for the polygon to approximate a circle
-            int sides = 3; // Adjust the number of sides for a smoother or more polygonal circle
+           
+            int sides = 3; 
             double angleIncrement = 360.0 / sides;
 
             for (int i = 0; i < sides; i++)
@@ -153,7 +146,6 @@ namespace ArtForEveryone
                 poly.Points.Add(new Point(x, y));
             }
 
-            // Add the polygon to the canvas (assuming you have a canvas named WorkingSpace)
             canvas.Children.Add(poly);
         }
 
@@ -163,14 +155,12 @@ namespace ArtForEveryone
             double mouseY = currentPoint.Y;
             double polySize = 40;
 
-            // Create a polygon to represent a circle
             Polygon poly = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            poly.Stroke = brushColor; // Set the border color
-            poly.StrokeThickness = 2;    // Set the border thickness
+            poly.Stroke = brushColor;
+            poly.StrokeThickness = 2;  
 
-            // Calculate the points for the polygon to approximate a circle
-            int sides = 10; // Adjust the number of sides for a smoother or more polygonal circle
+            int sides = 10;
             double angleIncrement = 360.0 / sides;
 
             for (int i = 0; i < sides; i++)
@@ -181,7 +171,6 @@ namespace ArtForEveryone
                 poly.Points.Add(new Point(x, y));
             }
 
-            // Add the polygon to the canvas (assuming you have a canvas named WorkingSpace)
             canvas.Children.Add(poly);
         }
         public void DrawSquare(Point currentPoint, Canvas canvas, Color color)
@@ -190,14 +179,13 @@ namespace ArtForEveryone
             double mouseY = currentPoint.Y;
             double polySize = 40;
 
-            // Create a polygon to represent a circle
+
             Polygon poly = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            poly.Stroke = brushColor; // Set the border color
-            poly.StrokeThickness = 2;    // Set the border thickness
+            poly.Stroke = brushColor;
+            poly.StrokeThickness = 2;   
 
-            // Calculate the points for the polygon to approximate a circle
-            int sides = 4; // Adjust the number of sides for a smoother or more polygonal circle
+            int sides = 4;
             double angleIncrement = 360.0 / sides;
 
             for (int i = 0; i < sides; i++)
@@ -208,7 +196,6 @@ namespace ArtForEveryone
                 poly.Points.Add(new Point(x, y));
             }
 
-            // Add the polygon to the canvas (assuming you have a canvas named WorkingSpace)
             canvas.Children.Add(poly);
         }
 
@@ -219,10 +206,10 @@ namespace ArtForEveryone
 
             Polygon poly = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            poly.Stroke = brushColor; // Set the border color
+            poly.Stroke = brushColor; 
             poly.StrokeThickness = 2;
 
-            int sides = 4; // Prostokąt ma 4 wierzchołki
+            int sides = 4;
             double angleIncrement = 360.0 / sides;
 
             for (int i = 0; i < sides; i++)
@@ -243,7 +230,7 @@ namespace ArtForEveryone
 
             Polygon poly = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            poly.Stroke = brushColor; // Set the border color
+            poly.Stroke = brushColor; 
             poly.StrokeThickness = 2;
 
             poly.Points.Add(new Point(centerX - width / 2, centerY - height / 2)); // Lewy górny róg
@@ -258,16 +245,16 @@ namespace ArtForEveryone
         {
             Polygon star = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            star.Stroke = brushColor; // Set the border color
+            star.Stroke = brushColor; 
             star.StrokeThickness = 2;
 
-            double angleIncrement = 360.0 / (2 * arms); // Kąt pomiędzy ramionami
+            double angleIncrement = 360.0 / (2 * arms); 
 
             for (int i = 0; i < 2 * arms; i++)
             {
                 double angle = i * angleIncrement;
 
-                // Alternatywnie dłuższe i krótsze linie, aby uzyskać efekt gwiazdy
+                //  dłuższe i krótsze linie, aby uzyskać efekt gwiazdy
                 double armRadius = (i % 2 == 0) ? radius : radius / 2;
 
                 double x = center.X + armRadius * Math.Cos(Math.PI * angle / 180.0);
@@ -283,21 +270,18 @@ namespace ArtForEveryone
         {
             Polygon arrow = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            arrow.Stroke = brushColor; // Set the border color
+            arrow.Stroke = brushColor; 
             arrow.StrokeThickness = 2;
 
-            double arrowAngle = 30.0; // Kąt pomiędzy ramionami strzałki
+            double arrowAngle = 30.0; // kat pomiędzy ramionami strzałki
 
-            // Konwersja kąta na radiany
             double angleInRadians = Math.PI * angleInDegrees / 180.0;
 
-            // Punkt końcowy strzałki
             double endX = startPoint.X + length * Math.Cos(angleInRadians);
             double endY = startPoint.Y + length * Math.Sin(angleInRadians);
 
-            arrow.Points.Add(new Point(startPoint.X, startPoint.Y)); // Początek strzałki
+            arrow.Points.Add(new Point(startPoint.X, startPoint.Y)); 
 
-            // Dodaj ramiona strzałki
             for (int i = -1; i <= 1; i += 2)
             {
                 double arrowTipX = endX + i * arrowAngle * Math.Cos(angleInRadians - Math.PI / 2);
@@ -306,7 +290,7 @@ namespace ArtForEveryone
                 arrow.Points.Add(new Point(arrowTipX, arrowTipY));
             }
 
-            arrow.Points.Add(new Point(endX, endY)); // Koniec strzałki
+            arrow.Points.Add(new Point(endX, endY)); 
 
             canvas.Children.Add(arrow);
         }
@@ -315,21 +299,19 @@ namespace ArtForEveryone
         {
             Polygon arrow = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            arrow.Stroke = brushColor; // Set the border color
+            arrow.Stroke = brushColor; 
             arrow.StrokeThickness = 2;
 
-            double arrowAngle = 30.0; // Kąt pomiędzy ramionami strzałki
+            double arrowAngle = 30.0; 
 
-            // Konwersja kąta na radiany
             double angleInRadians = Math.PI * angleInDegrees / 180.0;
 
-            // Punkt górny strzałki
+        
             double topX = bottomPoint.X + length * Math.Cos(angleInRadians);
             double topY = bottomPoint.Y - length * Math.Sin(angleInRadians); // Uwaga: Odejmujemy, aby iść w górę
 
-            arrow.Points.Add(new Point(bottomPoint.X, bottomPoint.Y)); // Początek strzałki (dół)
+            arrow.Points.Add(new Point(bottomPoint.X, bottomPoint.Y)); 
 
-            // Dodaj ramiona strzałki
             for (int i = -1; i <= 1; i += 2)
             {
                 double arrowTipX = topX + i * arrowAngle * Math.Cos(angleInRadians - Math.PI / 2);
@@ -350,14 +332,13 @@ namespace ArtForEveryone
             double mouseY = currentPoint.Y;
             double polySize = 40;
 
-            // Create a polygon to represent a circle
+           
             Polygon poly = new Polygon();
             Brush brushColor = new SolidColorBrush(color);
-            poly.Stroke = brushColor; // Set the border color
-            poly.StrokeThickness = 2;    // Set the border thickness
+            poly.Stroke = brushColor; 
+            poly.StrokeThickness = 2;    
 
-            // Calculate the points for the polygon to approximate a circle
-            int sides = 203; // Adjust the number of sides for a smoother or more polygonal circle
+            int sides = 203; 
             double angleIncrement = 360.0 / sides;
 
             for (int i = 0; i < sides; i++)
@@ -368,7 +349,6 @@ namespace ArtForEveryone
                 poly.Points.Add(new Point(x, y));
             }
 
-            // Add the polygon to the canvas (assuming you have a canvas named WorkingSpace)
             canvas.Children.Add(poly);
         }
     }

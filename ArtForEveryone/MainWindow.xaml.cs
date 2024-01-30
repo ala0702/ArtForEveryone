@@ -162,17 +162,17 @@ namespace ArtForEveryone
                 }
                 else if (drawStyle == 12)
                 {
-                    //eownoleglobok
+
                     drawingHelper.DrawParallelogram(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 13)
                 {
-                    //eownoleglobok
+
                     drawingHelper.DrawStar(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if (drawStyle == 14)
                 {
-                    //eownoleglobok
+  
                     drawingHelper.DrawVerticalArrow(currentPoint, WorkingSpace, ViewModel.MainColor);
                 }
                 else if(drawStyle == 15)
@@ -196,8 +196,6 @@ namespace ArtForEveryone
             {
                 if (drawStyle == 1)
                 {
-                    // Use the returned line from DrawCustomLine and add it to the canvas
-                    //drawingHelper.DrawCustomLine(ref currentPoint, e, WorkingSpace, ViewModel.MainColor);
 
                     if (startCustomPoint == default(Point))
                     {
@@ -208,7 +206,7 @@ namespace ArtForEveryone
                     Line line = new Line();
                     Brush brushColor = new SolidColorBrush(ViewModel.MainColor);
                     line.Stroke = brushColor;
-                    line.StrokeThickness = 2; // Grubość linii
+                    line.StrokeThickness = 2; 
                     line.X1 = startCustomPoint.X;
                     line.Y1 = startCustomPoint.Y;
                     line.X2 = currentPoint.X;
@@ -216,7 +214,6 @@ namespace ArtForEveryone
 
                     WorkingSpace.Children.Add(line);
 
-                    // Aktualizacja punktu początkowego na bieżącą pozycję myszy
                     startCustomPoint = currentPoint;
 
                 }
@@ -273,12 +270,12 @@ namespace ArtForEveryone
         {
             foreach (LineSegment lineSegment in lineSegments)
             {
-                // Przyjmuję, że GetBounds to metoda zwracająca obszar objęty przez odcinek (mogła byś ją dodać do klasy LineSegment)
+                // metoda zwracająca obszar objęty przez odcinek (mogła byś ją dodać do klasy LineSegment)
                 Rect bounds = lineSegment.GetBounds();
 
                 if (bounds.Contains(mousePosition))
                 {
-                    // Jeśli mysz znajduje się w obszarze odcinka, to zwróć ten odcinek
+                    
                     return lineSegment;
                 }
             }
@@ -290,7 +287,7 @@ namespace ArtForEveryone
         // NAVBAR OBSLUGA
         private void Przycisk_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Informacje o aplikacji");
+            MessageBox.Show("Informacje o aplikacji:\nArtForEveryone to prosty program do rysowania i edycji grafiki, stworzony w technologii C# z wykorzystaniem platformy WPF. Aplikacja umożliwia użytkownikowi tworzenie różnorodnych obrazów za pomocą różnych narzędzi rysunkowych i edycyjnych. ");
         }
 
         private void DrawBtn_Click(object sender, RoutedEventArgs e)

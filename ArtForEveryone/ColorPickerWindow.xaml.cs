@@ -43,18 +43,15 @@ namespace ArtForEveryone
                 }
                 else
                 {
-                    // Komunikat o błędzie - wartości kolorów poza zakresem
                     MessageBox.Show("Wartości kolorów muszą być w zakresie od 0 do 255.");
                 }
             }
             catch (FormatException)
             {
-                // Komunikat o błędzie - nieprawidłowy format liczby
                 MessageBox.Show("Wprowadzono nieprawidłowy format liczby.");
             }
             catch (OverflowException)
             {
-                // Komunikat o błędzie - przekroczenie zakresu liczby
                 MessageBox.Show("Przekroczono zakres liczby.");
             }
         }
